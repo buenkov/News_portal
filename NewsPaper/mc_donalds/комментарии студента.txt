@@ -1,0 +1,70 @@
+Что вы должны сделать в консоли Django?
+
+1.Создать двух пользователей (с помощью метода User.objects.create_user('username')).
+python manage.py shell
+from django.contrib.auth.models import User
+user1 = User.objects.create_user('username1', password='your_password1')
+user2 = User.objects.create_user('username2', password='your_password1')
+user3 = User.objects.create_user('player3', password='your_password3')
+
+2.Создать два объекта модели Author, связанные с пользователями.
+author1 = Author.objects.create(user=user1, rating=0)
+author2 = Author.objects.create(user=user3, rating=0) 
+
+3.Добавить 4 категории в модель Category.
+cat1 = Category.objects.create(name='Желтая пресса')
+cat2 = Category.objects.create(name='МузОбоз')
+cat3 = Category.objects.create(name='Политика')
+cat4 = Category.objects.create(name='Литература')
+
+4.Добавить 2 статьи и 1 новость.
+
+art1 = Post.objects.create(author = author1, art_new = 'A', title = 'Велосипед проехал на красный', text = 'Велосипед в шатате Флорида проехал на красный свет', rating = 0)
+
+art2 = Post.objects.create(author = author2, art_new = 'A', title = 'Самосвал проехал на красный', text = 'Самосвал в шатате Флорида проехал на красный свет', rating = 0)
+
+news1 = Post.objects.create(author = author1, art_new = 'N', title = 'Жираф пропал', text = 'Самосвал в шатате Флорида проехал на красный свет и после этого пропал жираф и велосипедист', rating = 0)
+
+
+5.Присвоить им категории (как минимум в одной статье/новости должно быть не меньше 2 категорий).
+art1.categories.add(cat1)
+art1.categories.add(cat2)
+art1.categories.add(cat4)
+
+art2.categories.add(cat2)
+art2.categories.add(cat3)
+
+news1.categories.add(cat2)
+news1.categories.add(cat3)
+
+6.Создать как минимум 4 комментария к разным объектам модели Post (в каждом объекте должен быть как минимум один комментарий).
+
+com1 = Comment.objects.create(post = art1, user = user1, text = 'Вау', rating = 0)
+com2 = Comment.objects.create(post = art1, user = user2, text = 'Угу') 
+com3 = Comment.objects.create(post = art2, user = user3, text = 'Пушка')
+com4 = Comment.objects.create(post = news1, user = user3, text = 'Пушка') 
+
+
+
+7.Применяя функции like() и dislike() к статьям/новостям и комментариям, скорректировать рейтинги этих объектов.
+
+art1.like()
+art1.like()
+.......
+
+8.Обновить рейтинги пользователей.
+
+author1.update_rating()
+author2.update_rating()
+
+9.Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
+
+author1.who_best() 
+
+10. Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
+
+art1.best()
+
+11.Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+
+news1.all_comments() 

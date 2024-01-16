@@ -1,0 +1,24 @@
+from mc_donalds.models import *
+from django.contrib.auth.models import User
+from django.db.models import Sum
+
+user1 = User.objects.get(id=1)
+user2 = User.objects.get(id=2)
+user3 = User.objects.get(id=3)
+
+author1 = Author.objects.get(id=1)
+author2 = Author.objects.get(id=2)
+
+cat1 = Category.objects.get(id=1)
+cat2 = Category.objects.get(id=2)
+cat3 = Category.objects.get(id=3)
+cat4 = Category.objects.get(id=4)
+
+art1 = Post.objects.get(id=1)
+art2 = Post.objects.get(id=2)
+news1 = Post.objects.get(id=3)
+
+com1 = Comment.objects.get(id=1)
+com2 = Comment.objects.get(id=2)
+com3 = Comment.objects.get(id=3)
+com4 = Comment.objects.get(id=4)
